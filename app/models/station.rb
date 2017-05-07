@@ -1,6 +1,7 @@
 class Station < ActiveRecord::Base
   belongs_to :city
   belongs_to :date_ref
+  has_many :trip
 
   validates :name, presence: true
   validates :dock_count, presence: true
@@ -26,6 +27,21 @@ class Station < ActiveRecord::Base
         minimum_bikes: Station.minimum(:dock_count),
         earliest_date: Station.includes(:date_ref).order("date_refs.date").first.date_ref.id,
         latest_date: Station.includes(:date_ref).order("date_refs.date").last.date_ref.id
+    }
+  end
+
+  def self.validate_name_change(name)
+    if equivalent_names[name]
+      equivalent_names[name]
+    else
+      name
+    end
+  end
+
+  def self.equivalent_names
+    {
+        "San Jose Government Center"=>"Santa Clara County Civic Center",
+       "Broadway at Main" =>"Stanford in Redwood City"
     }
   end
 end
