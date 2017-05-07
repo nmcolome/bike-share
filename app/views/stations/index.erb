@@ -1,0 +1,27 @@
+<h1>All Stations</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Dock Count</th>
+    <th>Installation Date</th>
+    <th>City</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  <% @stations.each do |station| %>
+    <tr class="station">
+      <td><a href="/stations/<%= station.id %>"><%= station.name %></a></td>
+      <td><%= station.dock_count %></td>
+      <td><%= station.date_ref.name %></td>
+      <td><%= station.city.name %></td>
+      <td><input class="button_active" onclick="location.href='/stations/<%= station.id %>/edit';" type="button" value="Edit"></td>
+      <td>
+        <form action="/stations/<%= station.id %>" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="Delete">
+        </form>
+      </td>
+    </tr>
+  <% end %>
+</table>

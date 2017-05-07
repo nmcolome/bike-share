@@ -1,0 +1,20 @@
+<h1>Edit a Station</h1>
+
+<form action="/stations/<%= @station.id %>" method="post">
+  <input type="hidden" name="_method" value="PUT" />
+  <label for="">Name:</label>
+  <input type="textfield" name="station[name]" value="<%= @station.name %>">
+  <label for="">Dock count:</label>
+  <input type="textfield" name="station[dock_count]" value="<%= @station.dock_count %>">
+  <label for="">Installation Date:</label>
+  <input type="date" name="station[installation_date]" value="<%= @station.date_ref.date %>">
+  <select name="station[city_id]">
+    <option value=<%=@station.city.id%> selected="selected"><%= @station.city.name%></option>
+    <% @city.each do |city| %>
+      <option value=<%= city.id %>>
+        <%= city.name %>
+      </option>
+    <% end %>
+  </select>
+  <input type="submit" value="Edit Station" />
+</form>
