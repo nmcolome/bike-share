@@ -1,5 +1,8 @@
 <h1>All Stations</h1>
 
+<a href="/stations/new"><button>Add Station</button></a>
+<a href="/stations-dashboard"><button>Dashboard</button></a>
+
 <table>
   <tr>
     <th>Name</th>
@@ -13,9 +16,9 @@
     <tr class="station">
       <td><a href="/stations/<%= station.id %>"><%= station.name %></a></td>
       <td><%= station.dock_count %></td>
-      <td><%= station.date_ref.name %></td>
+      <td><%= station.date_ref.date %></td>
       <td><%= station.city.name %></td>
-      <td><input class="button_active" onclick="location.href='/stations/<%= station.id %>/edit';" type="button" value="Edit"></td>
+      <td><a href="/stations/<%= station.id %>/edit"><button>Edit</button></a></td>
       <td>
         <form action="/stations/<%= station.id %>" method="POST">
           <input type="hidden" name="_method" value="DELETE">

@@ -2,7 +2,7 @@
 
 <h2>Info</h2>
 <p>Dock Count: <%= @station.dock_count%></p>
-<p>Installation Date: <%= @station.date_ref.name %></p>
+<p>Installation Date: <%= @station.date_ref.date %></p>
 <p>City: <%= @station.city.name %></p>
 <input class="button_active" onclick="location.href='/stations/<%= @station.id %>/edit';" type="button" value="Edit">
 <form action="/stations/<%= @station.id %>" method="POST">
