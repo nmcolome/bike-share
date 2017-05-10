@@ -1,30 +1,37 @@
-<a href="/stations"><button>All Stations</button></a>
-</br>
-<p>Total station count: <%= @dashboard_data[:total_count] %></p>
-<p>Average bikes per station: <%= @dashboard_data[:average_bikes] %></p>
+<div class="page-header top">
+  <h1 class="title">Stations Dashboard</h1><br/>
+</div>
 
-<p>Stations with the most bikes available</p>
-<p>Bikes per station: <%= @dashboard_data[:max_bikes] %></p>
-<ul><% @dashboard_data[:max_bikes_stations].each do |station| %>
-  <li><a href="/stations/<%= station.id %>"><%= station.name %></a></li>
-  <% end %>
-</ul>
+<div class="container stations-dashboard">
 
-<p>Stations with the fewest bikes available</p>
-<p>Bikes per station: <%= @dashboard_data[:min_bikes] %></p>
-<ul><% @dashboard_data[:min_bikes_stations].each do |station| %>
-  <li><a href="/stations/<%= station.id %>"><%= station.name %></a></li>
-  <% end %>
-</ul>
+  <a href="/stations"><button class="btn btn-default">All Stations</button></a>
 
-<p>Most recently installed station(s)</p>
-<ul><% @dashboard_data[:most_recent_stations].each do |station| %>
-  <li><a href="/stations/<%= station.id %>"><%= station.name %></a></li>
-  <% end %>
-</ul>
+  <p>Total station count:<span class="dashboard-value"> <%= @dashboard_data[:total_count] %></span></p>
+  <p>Average bikes per station: <%= @dashboard_data[:average_bikes] %></p>
 
-<p>Oldest station(s)</p>
-<ul><% @dashboard_data[:oldest_stations].each do |station| %>
-  <li><a href="/stations/<%= station.id %>"><%= station.name %></a></li>
-  <% end %>
-</ul>
+  <p>Stations with the most bikes available</p>
+  <p>Bikes per station: <%= @dashboard_data[:max_bikes] %></p>
+  <ul><% @dashboard_data[:max_bikes_stations].each do |station| %>
+    <li><a href="/stations/<%= station.id %>"><%= station.name %></a></li>
+    <% end %>
+  </ul>
+
+  <p>Stations with the fewest bikes available</p>
+  <p>Bikes per station: <%= @dashboard_data[:min_bikes] %></p>
+  <ul><% @dashboard_data[:min_bikes_stations].each do |station| %>
+    <li><a href="/stations/<%= station.id %>"><%= station.name %></a></li>
+    <% end %>
+  </ul>
+
+  <p>Most recently installed station(s)</p>
+  <ul><% @dashboard_data[:most_recent_stations].each do |station| %>
+    <li><a href="/stations/<%= station.id %>"><%= station.name %></a></li>
+    <% end %>
+  </ul>
+
+  <p>Oldest station(s)</p>
+  <ul><% @dashboard_data[:oldest_stations].each do |station| %>
+    <li><a href="/stations/<%= station.id %>"><%= station.name %></a></li>
+    <% end %>
+  </ul>
+</div>

@@ -32,7 +32,7 @@ class BikeShareApp < Sinatra::Base
 #route after filling new station form
   post '/stations' do
     @station = Station.create_new(params)
-    binding.pry
+
     redirect "/stations/#{@station.id}"
   end
 
