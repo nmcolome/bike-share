@@ -200,4 +200,14 @@ class BikeShareApp < Sinatra::Base
     redirect "/conditions"
   end
 
+
+
+###################################
+##WEATHER
+###################################
+
+  get '/google' do
+    erb :'google/google'
+  end
+
 end
