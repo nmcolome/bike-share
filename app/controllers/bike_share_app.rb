@@ -151,6 +151,9 @@ class BikeShareApp < Sinatra::Base
   get '/conditions-dashboard' do
     @dashboard_data = WeatherStatistic.dashboard
     @temp_data =  WeatherStatistic.temp_data(@dashboard_data)
+    @precip_data =  WeatherStatistic.precip_data(@dashboard_data)
+    @wind_data =  WeatherStatistic.wind_data(@dashboard_data)
+    @visib_data =  WeatherStatistic.visib_data(@dashboard_data)
     erb :'weather/dashboard'
   end
 

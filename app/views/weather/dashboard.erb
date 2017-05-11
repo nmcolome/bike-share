@@ -5,6 +5,9 @@
 <div class="container all-stations trips-dashboard">
   <div class="panel">
     <div class="panel-heading stations-panel">Breakdown of Ride Data</div>
+    
+    <%= erb :'charts/chart_temp'%>
+    
     <h3>Ride Stats Based on Temperature</h3>
 
     <table class="table table-striped table-hover table-condensed table-bordered">
@@ -23,8 +26,6 @@
         </tr>
       <% end %>
     </table></br>
-    
-    <%= erb :'charts/chart_temp'%>
 
     <h3>Ride Stats Based on Precipitation
     </h3>

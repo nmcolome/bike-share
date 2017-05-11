@@ -97,6 +97,22 @@ class WeatherStatistic < ActiveRecord::Base
     end
   end
 
+  def self.precip_data(data)
+    data[:breakout_avg_max_min_rides_days_precipitation].map do |k,v|
+      [k,v].flatten
+    end
+  end
+    def self.wind_data(data)
+    data[:breakout_avg_max_min_rides_days_wind_speed].map do |k,v|
+      [k,v].flatten
+    end
+  end
+    def self.visib_data(data)
+    data[:breakout_avg_max_min_rides_days_visibility].map do |k,v|
+      [k,v].flatten
+    end
+  end
+
   def self.format(hash)
     hash.map do |ranges| 
       max_min_avg(ranges)
