@@ -152,6 +152,9 @@ class BikeShareApp < Sinatra::Base
 #weather dashboard with statistics
   get '/conditions-dashboard' do
     @dashboard_data = WeatherStatistic.dashboard
+    @temp_data =     @dashboard_data[:breakout_avg_max_min_rides_days_high_temp].map do |k,v|
+      [k,v].flatten
+    end
     erb :'weather/dashboard'
   end
 
