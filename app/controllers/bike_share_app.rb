@@ -4,7 +4,6 @@ class BikeShareApp < Sinatra::Base
     erb :index
   end
 
-
   get '/location' do
     erb :location
   end
@@ -154,7 +153,6 @@ class BikeShareApp < Sinatra::Base
     @trip = Trip.destroy(params[:id])
     redirect "/trips"
   end
-
 
 ###################################
 ##WEATHER
