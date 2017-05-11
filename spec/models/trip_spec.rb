@@ -177,4 +177,6 @@ RSpec.describe Trip do
       expect(dashboard[:lowest_trip_date][0].to_s).to eq("2013-08-05")
     end
   end
+
+  describe
 end

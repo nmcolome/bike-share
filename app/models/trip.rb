@@ -1,5 +1,6 @@
 require 'date'
 class Trip<ActiveRecord::Base
+
   belongs_to :bike
   belongs_to :zipcode
   belongs_to :subscription_type
@@ -22,58 +23,28 @@ class Trip<ActiveRecord::Base
     "Trip: #{self.id}"
   end
 
+  def self.retrieve_id(id, arg)
+    object={
+      bike: Bike,
+      date: DateRef,
+      zip: Zipcode,
+      sub: SubscriptionType,
+    }
+    new_obj = object[id].find_or_create_by!(arg)
+    new_obj.id
+  end
+
   def self.sterilize(params)
     trip = params[:trip]
-
     { 
-      start_date: Trip.validate_date(trip[:start_date]), 
-      end_date: Trip.validate_date(trip[:end_date]), 
-      bike: Trip.validate_bike(trip[:bike]),
-      zipcode: Trip.zip_validate(trip[:zipcode]), 
-      subscription: Trip.validate_subscription(trip[:subscription]), 
+      start_date: validate_date(trip[:start_date]), 
+      end_date: validate_date(trip[:end_date]), 
+      bike: validate_bike(trip[:bike]),
+      zipcode: zip_validate(trip[:zipcode]), 
+      subscription: validate_subscription(trip[:subscription]), 
       start_station: Station.find(trip[:start_station].to_i), 
       end_station: Station.find(trip[:end_station].to_i) 
     }
-  end
-
-  def self.validate_subscription(subscription)
-    if subscription.empty?
-      ''
-    else
-      subscription = SubscriptionType.find_or_create_by!(sub_type: subscription)
-      subscription.id
-    end
-    
-  end
-
-  def self.validate_bike(bike)
-    if bike.empty?
-      ''
-    else
-      bike = Bike.find_or_create_by!(bike: bike) 
-      bike.id
-    end
-  end
-
-  def self.validate_date(date)  
-    if date.empty?
-      ''
-    else
-      date = date.split('T')[0]
-      date = DateRef.find_or_create_by!(date: date)
-      date.id
-    end
-    
-  end
-
-  def self.zip_validate(zipcode)
-    if  zipcode.nil? || zipcode.empty?
-      ''
-    else
-      zip = Zipcode.find_or_create_by!(zipcode: (zipcode[0..4]))
-      zip.id
-    end
-    
   end
 
   def self.create_new(params)
@@ -100,100 +71,167 @@ class Trip<ActiveRecord::Base
         bike_id: trip_data[:bike],
         zipcode_id: trip_data[:zipcode],
         subscription_type_id: trip_data[:subscription])
-        [status, trip]
+    [status, trip]
   end
 
   def self.dashboard
     {
       average_duration_ride: Trip.average(:duration).to_i,
-      longest_ride: Trip.longest_ride_data,
-      shortest_ride: Trip.shortest_ride_data,
-      popular_starting_station: Trip.group(:start_station).order("count_id DESC").count(:id).first[0].name,
-      popular_ending_station: Trip.group(:end_station).order("count_id DESC").count(:id).first[0].name,
-      month_breakdown: Trip.month_breakdown_data,
-      most_ridden_bike: Trip.group(:bike).order("count_id DESC").count(:id).first[0].bike,
-      least_ridden_bike: Trip.group(:bike).order("count_id ASC").count(:id).first[0].bike,
-      subscription_breakout: Trip.sort_subscription_breakout(subscription_query),
-      top_trip_date: Trip.sort_hash_merge(Trip.trip_date_query('DESC')),
-      lowest_trip_date:Trip.sort_hash_merge(Trip.trip_date_query('ASC'))
+      longest_ride: ride_data(:maximum),
+      shortest_ride: ride_data(:minimum),
+      popular_starting_station: popular_stations(:start_station),
+      popular_ending_station: popular_stations(:end_station),
+      month_breakdown: month_breakdown_data,
+      most_ridden_bike: ridden_bike('DESC'),
+      least_ridden_bike: ridden_bike('ASC'),
+      subscription_breakout: sort_subscription_breakout(subscription_query),
+      top_trip_date: sort_hash_merge(trip_date_query('DESC')),
+      lowest_trip_date: sort_hash_merge(trip_date_query('ASC'))
     }
+  end
+
+  def self.ridden_bike(direction)
+    Trip.group(:bike)
+        .order("count_id #{direction}")
+        .count(:id)
+        .first[0]
+        .bike
+  end
+
+  def self.popular_stations(column)
+    Trip.group(column)
+        .order("count_id DESC")
+        .count(:id).first[0]
+        .name
   end
 
   def self.month_breakdown_data
-    break_down = DateRef.distinct.pluck('extract(year from date)').map{ |date| {date => Trip.sort_trips_by_date(date)}}
+    break_down = DateRef.distinct
+                        .pluck('extract(year from date)')
+                        .map{ |date| {date => Trip.sort_trips_by_date(date)}}
     break_down.reduce Hash.new, :merge
   end
 
-  def self.shortest_ride_data
-    trip = Trip.where(duration: Trip.minimum(:duration))
-    duration = Trip.minimum(:duration)
-    {
+  def self.sort_trips_by_date(date)
+    trip = query_trips_by_date(date).sort.to_h
+    trip.transform_keys do |key|
+      Date::MONTHNAMES[key]
+    end
+  end
+
+  def self.query_trips_by_date(date)
+    Trip.joins(:date_ref)
+        .where('extract(year from date) = ?', date)
+        .group('extract(month from date)')
+        .order('count_id DESC')
+        .count(:id)
+  end
+
+  def self.ride_data(direction)
+    duration = Trip.send(direction, :duration)
+    trip = Trip.where(duration: duration)
+    { 
       start: trip.first.start_station.name,
       end: trip.first.end_station.name,
-      duration: Trip.convert_duration(duration)
+      duration: convert_duration(duration)
     }
   end
 
-  def self.longest_ride_data
-    trip = Trip.where(duration: Trip.maximum(:duration))
-    duration = Trip.maximum(:duration)
-    {
-      start: trip.first.start_station.name,
-      end: trip.first.end_station.name,
-      duration: Trip.convert_duration(duration)
-    }
+  def self.sort_subscription_breakout(array)
+    array.map do |k, v| 
+      {
+        k.sub_type => [v, (v/Trip.count.to_f).round(2)]
+      }
+    end.inject(:merge)
+  end
+  
+  def self.subscription_query
+   Trip.group(:subscription_type)
+       .order("count_id DESC")
+       .count(:id) 
+  end
+
+  def self.sort_hash_merge(array)
+    array.map do |k, v| 
+      {k.date => v}
+    end.inject(:merge).first
+  end
+
+  def self.trip_date_query(mode)
+    Trip.group(:date_ref)
+        .order("count_id #{mode}")
+        .count(:id)
+  end
+
+  def self.page_load(id)
+    Trip.limit(30)
+        .offset(id.to_i * 30)
   end
 
   def self.convert_duration(duration)
     if duration <= 60
       "Hours: 00 Min: 00 Sec:#{duration}"
     elsif ((duration/60)/60) > 23
-      days = (((duration/60)/60))/24
-      hr = ((duration/60)/60) % 24
-      mn = (duration/60) % 60
-      sc = duration % 60
-      "Days: #{days} Hours: #{hr} Min: #{mn} Sec: #{sc}"
+      days(duration)
     elsif (duration/60) > 59
-      hr = ((duration/60)/60)
-      mn = (duration/60) % 60
-      sc = duration % 60
-      "Hours: #{hr} Min: #{mn} Sec:#{sc}"
+      hours(duration)
     elsif  
-      sc = duration % 60
-      mn = (duration/60).to_i
-      "Hours: 00 Min: #{mn} Sec: #{sc}"
+      minutes(duration)
     end
-  end
-
-  def self.sort_trips_by_date(date)
-    trip = Trip.joins(:date_ref)
-        .where('extract(year from date) = ?', date)
-        .group('extract(month from date)')
-        .order('count_id DESC')
-        .count(:id)
-    trip = trip.sort.to_h
-    trip.transform_keys do |key|
-      Date::MONTHNAMES[key]
-    end
-  end
-
-  def self.sort_subscription_breakout(array)
-    array.map{|k, v| {k.sub_type=> [v, (v/Trip.count.to_f).round(2)]}}.inject(:merge)
   end
   
-  def self.subscription_query
-   Trip.group(:subscription_type).order("count_id DESC").count(:id) 
+  def self.days(duration)
+    days = (((duration/60)/60))/24
+    hr = ((duration/60)/60) % 24
+    mn = (duration/60) % 60
+    sc = duration % 60
+    "Days: #{days} Hours: #{hr} Min: #{mn} Sec: #{sc}"
   end
 
-  def self.sort_hash_merge(array)
-    array.map{|k, v| {k.date => v}}.inject(:merge).first
+  def self.hours(duration)
+    hr = ((duration/60)/60)
+    mn = (duration/60) % 60
+    sc = duration % 60
+    "Hours: #{hr} Min: #{mn} Sec:#{sc}"
   end
 
-  def self.trip_date_query(mode)
-    Trip.group(:date_ref).order("count_id #{mode}").count(:id)
+  def self.minutes(duration)
+    sc = duration % 60
+    mn = (duration/60).to_i
+    "Hours: 00 Min: #{mn} Sec: #{sc}"
   end
 
-  def self.page_load(id)
-    Trip.limit(30).offset(id.to_i * 30)
+  def self.validate_subscription(subscription)
+    if subscription.empty?
+      ''
+    else
+      retrieve_id(:sub, sub_type: subscription)
+    end
   end
+
+  def self.validate_bike(bike)
+    if bike.empty?
+      ''
+    else
+      retrieve_id(:bike, bike: bike)
+    end
+  end
+
+  def self.zip_validate(zipcode)
+    if  zipcode.nil? || zipcode.empty?
+      ''
+    else
+      retrieve_id(:zip, zipcode: (zipcode[0..4]))
+    end
+  end
+  
+  def self.validate_date(date)  
+    if date.empty?
+      ''
+    else
+      date = date.split('T')[0]
+      retrieve_id(:date, date: date)
+    end
+  end
+
 end

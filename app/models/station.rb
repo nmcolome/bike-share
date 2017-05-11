@@ -34,15 +34,6 @@ class Station < ActiveRecord::Base
     [status, station]
   end
 
-  def self.validate_date(params)
-    if params[:station][:installation_date].empty?
-      ''
-    else
-      date = DateRef.find_or_create_by(date: params[:station][:installation_date])
-      date.id
-    end
-  end
-
   def self.dashboard
     {
       total_count: Station.count,
@@ -91,6 +82,15 @@ class Station < ActiveRecord::Base
       equivalent_names[name]
     else
       name
+    end
+  end
+
+  def self.validate_date(params)
+    if params[:station][:installation_date].empty?
+      ''
+    else
+      date = DateRef.find_or_create_by(date: params[:station][:installation_date])
+      date.id
     end
   end
 

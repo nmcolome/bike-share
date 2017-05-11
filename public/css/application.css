@@ -5,12 +5,13 @@
 */
 
 html {
-  margin: 0;
-  height: 100%;
-  width: 100%;
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }
 
 body {
+
   background: url("../assets/images/pexels-photo-165541.jpeg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -18,39 +19,40 @@ body {
   background-size: cover;
   margin: 0;
   color: #212121;
-}
 
-.navbar-brand{
-  padding: 0px 15px;
+
+
+.navbar-brand {
+    padding: 0px 15px;
 }
 
 .navbar-brand img {
-  height: 25px;
-  width: auto;
-  margin: 0;
-  padding: 0;
+    height: 25px;
+    width: auto;
+    margin: 0;
+    padding: 0;
 }
 
-
 .navbar-default {
-  background-color: #00BBFF;
-  border-color: #00BBFF;
-  color: #FFFFFF;
+    background-color: #00BBFF;
+    border-color: #00BBFF;
+    color: #FFFFFF;
 }
 
 .navbar-default .navbar-brand {
-  color: #f5f5f5;
-  padding-top: 15px;
+    color: #f5f5f5;
+    padding-top: 15px;
 }
 
-
-.navbar-default .navbar-nav > li > a {
-  color: white;
+.navbar-default .navbar-nav>li>a {
+    color: white;
 }
 
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus{
-  background-color: #00BBFF;
-  color: #1e1e1e;
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav>.open>a:focus {
+    background-color: #00BBFF;
+    color: #1e1e1e;
 }
 
 
@@ -60,39 +62,25 @@ body {
   ========================================
 */
 
-#home-header {
-  color: #1e1e1e;
-  font-size: 200px;
-  line-height: 1;
-  font-weight: 700;
-  text-align: left;
-  text-transform: uppercase;
-  text-shadow: 0 0 10px white;
-  margin-top: 90px;
-}
 
-.home-link {
-  display: inline;
-  border: 3px solid black;
-  border-radius: 10px;
-  padding: 5px;
-  background: lightblue;
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  text-shadow: 0 0 10px black;
-  font-weight: 400;
-  font-size: 25px;
-}
+/*h1#home-header {*/
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*justify-content: center;*/
+  /*margin: 10%;*/
+  /*align-items: center;*/
+  /*color: whitesmoke;*/
+  /*font-size: 5rem;*/
+/*}*/
 
-.home-link a {
-  color: #FFFFFF;
-  text-decoration: none;
+img#home-header {
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  display: block;
+  margin: 10% auto;
 }
-
-.home-link a:hover {
-  color: black;
-}
-
 
 /*
   ========================================
@@ -101,87 +89,91 @@ body {
 */
 
 .page-header {
-  padding-right: 50px;
-  padding-top: 50px;
-  background-color: rgba(74,189,172,0.9);
-  margin-top: 0;
-  margin-bottom: 75px;
+    padding-right: 50px;
+    padding-top: 50px;
+    background-color: rgba(74, 189, 172, 0.9);
+    margin-top: 0;
+    margin-bottom: 75px;
 }
 
 .top {
-  position: relative;
-  width: 100%;
-  background-color: rgb(89, 0, 111);
-  height: 250px;
-  opacity: 1;
-  text-align: center;
-  color: #fff;
+    position: relative;
+    width: 100%;
+    background-color: rgb(89, 0, 111);
+    height: 250px;
+    opacity: 1;
+    text-align: center;
+    color: #fff;
 }
 
 .title {
-  position: absolute;
-  top: 40%;
-  right: 100px;
+    position: absolute;
+    top: 40%;
+    right: 100px;
 }
 
 .page-header h1 {
-  font-size: 80px;
+
+  font-size: 40px;
   font-weight: 700;
   color: whitesmoke;
+
 }
 
 .all-stations {
-  width: 60%;
+    width: 60%;
 }
 
 .panel-heading {
-  background-color: rgb(89, 0, 111);
-  color: #FFCE00;
-  text-align: left;
+    background-color: rgb(89, 0, 111);
+    color: #FFCE00;
+    text-align: left;
 }
 
 .stations-panel {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 .all-stations .table th {
-  font-size: 15px;
-  color: black;
-  text-align: center;
+    font-size: 15px;
+    color: black;
+    text-align: center;
 }
 
-.all-stations tr, td a {
-  color: #1e1e1e;
+.all-stations tr,
+td a {
+    color: #1e1e1e;
 }
+
 #station-name-header {
-  text-align: left;
-  padding-left: 50px;
+    text-align: left;
+    padding-left: 50px;
 }
 
 #edit-button {
-  text-align: center;
+    text-align: center;
 }
 
 .delete-button {
-  text-align: center;
+    text-align: center;
 }
 
 .station-name {
-  transition: all .2s ease-in-out;
-  font-size: 18px;
-  text-align: left;
-  padding-left: 50px;
+    transition: all .2s ease-in-out;
+    font-size: 18px;
+    text-align: left;
+    padding-left: 50px;
 }
 
 .station-name a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .station-name:hover {
-  color: #fa5e5b;
-  -webkit-transform: scaleX(1.1);
-  width: 80%;
-  text-decoration: none;
+    color: #fa5e5b;
+    -webkit-transform: scaleX(1.1);
+    width: 80%;
+    text-decoration: none;
 }
 
 .all-stations .table tr {
@@ -189,13 +181,21 @@ body {
 }
 
 @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @-webkit-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 
@@ -205,30 +205,31 @@ body {
   ========================================
 */
 
-.stations-show-bg {
-  background: url("/assets/images/old_bike.jpg") no-repeat center center fixed;
-}
-
 .station-box {
   margin: 0 auto;
-  background-color: rgba(255,255,255,0.9);
+  background-color: rgba(33, 33, 33, 0.9);
   width: 60%;
   padding: 30px;
-  border: 6px solid black;
+  border: 2px solid black;
   border-radius: 10px;
   margin-top: 15px;
   margin-bottom: 100px;
   font-size: 20px;
+  color: whitesmoke;
+
+
 }
 
 .station-box p {
-  text-align: left;
+    text-align: left;
 }
 
 .dashboard-value {
-  color: red;
+    color: red;
 }
-
+#station-name-header .page-header .top {
+  font-size: 2rem;
+}
 
 /*
   ========================================
@@ -237,15 +238,15 @@ body {
 */
 
 .station-edit {
-  width: 80%;
+    width: 80%;
 }
 
 .station-edit form {
-  text-align: left;
+    text-align: left;
 }
 
 .station-edit h2 {
-  text-align: left;
+    text-align: left;
 }
 
 
@@ -256,24 +257,25 @@ body {
 */
 
 .new-station {
-  margin: 0 auto;
-  background-color: rgba(33, 33, 33, 0.9);
-  width: 40%;
-  padding: 30px;
-  border: 2px solid black;
-  border-radius: 10px;
-  margin-bottom: 100px;
-  font-size: 1.2rem;
-  color: whitesmoke;
+    margin: 0 auto;
+    background-color: rgba(33, 33, 33, 0.9);
+    width: 40%;
+    padding: 30px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 100px;
+    font-size: 1.2rem;
+    color: whitesmoke;
 }
 
 .btn-primary {
-  background-color: #00BBFF;
+    background-color: #00BBFF;
 }
 
-.btn-primary button:hover{
-  background-color: #1e1e1e;
+.btn-primary button:hover {
+    background-color: #1e1e1e;
 }
+
 
 /*
   ========================================
@@ -282,23 +284,26 @@ body {
 */
 
 .stations-dashboard {
-  margin: 0 auto;
-  background-color: rgba(33, 33, 33, 0.9);
-  width: 60%;
-  padding: 30px;
-  border: 2px solid black;
-  border-radius: 10px;
-  margin-top: 15px;
-  margin-bottom: 100px;
-  font-size: 20px;
+    margin: 0 auto;
+    background-color: rgba(33, 33, 33, 0.9);
+    width: 60%;
+    padding: 30px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 100px;
+    font-size: 20px;
 }
 
-.stations-dashboard p, li, a  {
-  text-align: left;
-  color: whitesmoke;
+.stations-dashboard p,
+li,
+a {
+    text-align: left;
+    color: whitesmoke;
 }
-a button{
-  color: #1e1e1e;
+
+a button {
+    color: #1e1e1e;
 }
 
 
@@ -309,32 +314,32 @@ a button{
 */
 
 #trip-start-date {
-  transition: all .2s ease-in-out;
-  font-size: 12px;
-  text-align: left;
-  padding-left: 20px;
+    transition: all .2s ease-in-out;
+    font-size: 12px;
+    text-align: left;
+    padding-left: 20px;
 }
 
 #trip-start-date a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 #trip-start-date:hover {
-  color: #fa5e5b;
-  -webkit-transform: scaleX(1.1);
-  width: 80%;
-  text-decoration: none;
+    color: #fa5e5b;
+    -webkit-transform: scaleX(1.1);
+    width: 80%;
+    text-decoration: none;
 }
 
 .all-trips {
-  width: 90%;
-  text-align: center;
+    width: 90%;
+    text-align: center;
 }
 
 .all-trips .table th {
-  font-size: 15px;
-  color: black;
-  text-align: center;
+    font-size: 15px;
+    color: black;
+    text-align: center;
 }
 
 .all-trips .table tr {
@@ -349,16 +354,16 @@ a button{
 */
 
 .trip-edit {
-  width: 60%;
+    width: 60%;
 }
 
 .trip-edit form {
-  text-align: left;
-  width: 100%;
+    text-align: left;
+    width: 100%;
 }
 
 .trip-edit h2 {
-  text-align: left;
+    text-align: left;
 }
 
 
@@ -368,26 +373,25 @@ a button{
   ========================================
 */
 
-
 .new-trip {
-  margin: 0 auto;
-  background-color: rgba(255,255,255,0.9);
-  width: 60%;
-  padding: 30px;
-  border: 6px solid black;
-  border-radius: 10px;
-  margin-bottom: 100px;
-  font-size: 20px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 60%;
+    padding: 30px;
+    border: 6px solid black;
+    border-radius: 10px;
+    margin-bottom: 100px;
+    font-size: 20px;
 }
 
-.form-horizontal .control-label{
-  color: whitesmoke;
+.form-horizontal .control-label {
+    color: whitesmoke;
 }
 
 .form-group .form-control {
-  max-width: 100%;
-  background-color: #1e1e1e;
-  color: whitesmoke;
+    max-width: 100%;
+    background-color: #1e1e1e;
+    color: whitesmoke;
 }
 
 
@@ -398,17 +402,22 @@ a button{
 */
 
 .trips-dashboard {
-  width: 80%;
-  padding-bottom: 50px;
+    width: 80%;
+    padding-bottom: 50px;
 }
+
 
 /*
   ========================================
   Weather
   ========================================
 */
-input, button, select, textarea {
-    color: #555;
+
+input,
+button,
+select,
+textarea {
+
 }
 
 .error {
@@ -422,3 +431,4 @@ input, button, select, textarea {
     font-size: 20px;
     color: red;
 }
+
