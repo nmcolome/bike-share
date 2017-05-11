@@ -28,7 +28,7 @@ stations.each do |row|
 end
 
 
-trips = CSV.open './db/csv/trip_fixture.csv', headers:true, header_converters: :symbol
+trips = CSV.open './db/csv/trip.csv', headers:true, header_converters: :symbol
 trips.each do |row|
   start_date = row[:start_date]
   start_date = DateRef.clean_date(start_date)
