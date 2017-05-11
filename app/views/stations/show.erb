@@ -24,5 +24,9 @@
     <p>Date with highest number of trips started at this station: <%=	 @trip_individual_data[:most_popular_date] %></p>
     <p>Most Frequent Zipcode for users starting trips at this station: <%= @trip_individual_data[:most_popular_zipcode] %></p>
     <p>Bike id most frequently starting a trip at this station: <%= @trip_individual_data[:most_popular_bike] %></p>
+    <br>
+    <br>
+    <a href= "/api/v1/stations/<%=@station.id%>">API Key</a>
   </div>
 </div>
+

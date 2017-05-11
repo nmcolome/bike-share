@@ -4,6 +4,12 @@ class BikeShareApp < Sinatra::Base
     erb :index
   end
 
+  get '/api/v1/stations/:id' do
+    @station = Station.find(params[:id])
+    @trip_individual_data = Station.individual_dashboard(params[:id].to_i)
+    @station.to_json<<@trip_individual_data.to_json
+  end
+
 #station dashboard with statistics
   get '/stations-dashboard' do
     @dashboard_data = Station.dashboard
