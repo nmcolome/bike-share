@@ -17,7 +17,7 @@ body {
     -o-background-size: cover;
     background-size: cover;
     margin: 0;
-    color: #212121;
+    color: whitesmoke;
 }
 
 .navbar-brand {
@@ -60,36 +60,37 @@ body {
   ========================================
 */
 
+#home-header {
+    color: #1e1e1e;
+    font-size: 200px;
+    line-height: 1;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px white;
+    margin-top: 90px;
+}
 
-/*h1#home-header {*/
+.home-link {
+    display: inline;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    background: lightblue;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px black;
+    font-weight: 400;
+    font-size: 25px;
+}
 
+.home-link a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
 
-/*display: flex;*/
-
-
-/*flex-direction: row;*/
-
-
-/*justify-content: center;*/
-
-
-/*margin: 10%;*/
-
-
-/*align-items: center;*/
-
-
-/*color: whitesmoke;*/
-
-
-/*font-size: 5rem;*/
-
-
-/*}*/
-
-img#home-header {
-    display: block;
-    margin: 10% auto;
+.home-link a:hover {
+    color: black;
 }
 
 
@@ -110,7 +111,7 @@ img#home-header {
 .top {
     position: relative;
     width: 100%;
-    background-color: rgb(89, 0, 111);
+    background-color: rgb(74, 189, 172);
     height: 250px;
     opacity: 1;
     text-align: center;
@@ -124,9 +125,9 @@ img#home-header {
 }
 
 .page-header h1 {
-    font-size: 40px;
+    font-size: 1rem;
     font-weight: 700;
-    color: whitesmoke;
+    color: #414141;
 }
 
 .all-stations {
@@ -134,7 +135,7 @@ img#home-header {
 }
 
 .panel-heading {
-    background-color: rgb(89, 0, 111);
+    background-color: #056571;
     color: #FFCE00;
     text-align: left;
 }
@@ -147,11 +148,6 @@ img#home-header {
     font-size: 15px;
     color: black;
     text-align: center;
-}
-
-.all-stations tr,
-td a {
-    color: #1e1e1e;
 }
 
 #station-name-header {
@@ -214,17 +210,20 @@ td a {
   ========================================
 */
 
+.stations-show-bg {
+    background: url("/assets/images/old_bike.jpg") no-repeat center center fixed;
+}
+
 .station-box {
     margin: 0 auto;
-    background-color: rgba(33, 33, 33, 0.9);
+    background-color: rgba(255, 255, 255, 0.9);
     width: 60%;
     padding: 30px;
-    border: 2px solid black;
+    border: 6px solid black;
     border-radius: 10px;
     margin-top: 15px;
     margin-bottom: 100px;
     font-size: 20px;
-    color: whitesmoke;
 }
 
 .station-box p {
@@ -233,10 +232,6 @@ td a {
 
 .dashboard-value {
     color: red;
-}
-
-#station-name-header .page-header .top {
-    font-size: 2rem;
 }
 
 
@@ -267,22 +262,13 @@ td a {
 
 .new-station {
     margin: 0 auto;
-    background-color: rgba(33, 33, 33, 0.9);
+    background-color: rgba(255, 255, 255, 0.9);
     width: 40%;
     padding: 30px;
-    border: 2px solid black;
+    border: 6px solid black;
     border-radius: 10px;
     margin-bottom: 100px;
-    font-size: 1.2rem;
-    color: whitesmoke;
-}
-
-.btn-primary {
-    background-color: #00BBFF;
-}
-
-.btn-primary button:hover {
-    background-color: #1e1e1e;
+    font-size: 20px;
 }
 
 
@@ -294,25 +280,18 @@ td a {
 
 .stations-dashboard {
     margin: 0 auto;
-    background-color: rgba(33, 33, 33, 0.9);
+    background-color: rgba(255, 255, 255, 0.9);
     width: 60%;
     padding: 30px;
-    border: 2px solid black;
+    border: 6px solid black;
     border-radius: 10px;
     margin-top: 15px;
     margin-bottom: 100px;
     font-size: 20px;
 }
 
-.stations-dashboard p,
-li,
-a {
+.stations-dashboard p {
     text-align: left;
-    color: whitesmoke;
-}
-
-a button {
-    color: #1e1e1e;
 }
 
 
@@ -385,7 +364,7 @@ a button {
 .new-trip {
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.9);
-    width: 60%;
+    width: 40%;
     padding: 30px;
     border: 6px solid black;
     border-radius: 10px;
@@ -393,14 +372,8 @@ a button {
     font-size: 20px;
 }
 
-.form-horizontal .control-label {
-    color: whitesmoke;
-}
-
 .form-group .form-control {
     max-width: 100%;
-    background-color: #1e1e1e;
-    color: whitesmoke;
 }
 
 
@@ -426,10 +399,16 @@ input,
 button,
 select,
 textarea {
-
+    color: #555;
 }
 
-.error {
+/*
+  ========================================
+  Error
+  ========================================
+*/
+
+.thing {
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.9);
     width: 40%;
@@ -438,6 +417,4 @@ textarea {
     border-radius: 10px;
     margin-bottom: 100px;
     font-size: 20px;
-    color: red;
 }
-

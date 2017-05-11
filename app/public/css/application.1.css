@@ -425,9 +425,7 @@ a button {
 input,
 button,
 select,
-textarea {
-
-}
+textarea {}
 
 .error {
     margin: 0 auto;
@@ -440,4 +438,3 @@ textarea {
     font-size: 20px;
     color: red;
 }
-
