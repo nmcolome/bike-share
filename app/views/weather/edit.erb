@@ -3,6 +3,12 @@
   <h1 class="title text-left">Edit Trip Weather</h1><br/>
 </div>
 
+<% if params['errors'] %>
+<div class="container new-station">
+<%= erb :'errors/error'%>
+</div>
+<%end%>
+
 <h2>Weather:
     <%= @weather.id %>
 </h2>
@@ -27,7 +33,3 @@
   <input type="date" name="weather[date_ref_id]" value="<%= @weather.date_ref.date %>">
   <input type="submit" value="Edit Weather"/>
 </form>
-
-<% if params['errors'] %>
-<%= erb :'errors/error'%>
-<%end%>

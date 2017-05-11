@@ -2,6 +2,12 @@
   <h1 class="title text-left">Edit a Station</h1><br/>
 </div>
 
+<% if params['errors'] %>
+<div class="container new-station">
+<%= erb :'errors/error'%>
+</div>
+<%end%>
+
 <div class="container new-station">
   <form class="form-horizontal" action="/stations/<%= @station.id %>" method="post">
   <input type="hidden" name="_method" value="PUT" />
@@ -55,7 +61,3 @@
     </div>
   </form>
 </div>
-
-<% if params['errors'] %>
-<%= erb :'errors/error'%>
-<%end%>

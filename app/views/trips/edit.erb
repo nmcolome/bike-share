@@ -1,6 +1,13 @@
 <div class="page-header top">
   <h1 class="title text-left">Edit a Trip</h1><br/>
 </div>
+
+<% if params['errors'] %>
+<div class="container new-station">
+<%= erb :'errors/error'%>
+</div>
+<%end%>
+
 <div class="panel-heading stations-panel">Trip: <%= @trip.id %></div>
 
 <div class="container new-station">
@@ -91,7 +98,3 @@
       <input class="btn btn-primary" type="submit" value="Edit Trip" >
   </form>
 </div>
-
-<% if params['errors'] %>
-<%= erb :'errors/error'%>
-<%end%>

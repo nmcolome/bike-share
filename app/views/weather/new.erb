@@ -2,6 +2,12 @@
     <h1 class="title text-left">Create New Trip Weather</h1><br/>
   </div>
 
+  <% if params['errors'] %>
+  <div class="container new-station">
+  <%= erb :'errors/error'%>
+  </div>
+  <%end%>
+
   <div class="container new-station" >
     <form class="form-horizontal" action="/conditions" method="post">
       <div class="form-group" id="form-group">
@@ -59,8 +65,3 @@
       </div>
     </form>
   </div>
-
-
-<% if params['errors'] %>
-<%= erb :'errors/error'%>
-<%end%>
