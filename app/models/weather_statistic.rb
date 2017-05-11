@@ -16,13 +16,13 @@ class WeatherStatistic < ActiveRecord::Base
   def self.create_new(params)
     date = validate_date(params[:weather][:date_ref_id])
     ws = WeatherStatistic.create(max_temperature: params[:weather][:max_temperature],
-                            min_temperature: params[:weather][:max_temperature],
-                            mean_temperature: params[:weather][:max_temperature],
-                            mean_visibility: params[:weather][:max_temperature],
-                            mean_humidity: params[:weather][:max_temperature],
-                            mean_wind_speed: params[:weather][:max_temperature],
-                            precipitation: params[:weather][:precipitation],
-                            date_ref_id: date,
+                                 min_temperature: params[:weather][:max_temperature],
+                                 mean_temperature: params[:weather][:max_temperature],
+                                 mean_visibility: params[:weather][:max_temperature],
+                                 mean_humidity: params[:weather][:max_temperature],
+                                 mean_wind_speed: params[:weather][:max_temperature],
+                                 precipitation: params[:weather][:precipitation],
+                                 date_ref_id: date,
                           )
     [ws.save, ws]
   end
@@ -30,16 +30,15 @@ class WeatherStatistic < ActiveRecord::Base
   def self.update_record(params)
     date = validate_date(params[:weather][:date_ref_id])
     ws = WeatherStatistic.find(params[:id])
-    status = ws.update(
-                  max_temperature: params[:weather][:max_temperature],
-                  min_temperature: params[:weather][:min_temperature],
-                  mean_temperature: params[:weather][:mean_temperature],
-                  mean_visibility: params[:weather][:mean_visibility],
-                  mean_humidity: params[:weather][:mean_humidity],
-                  mean_wind_speed: params[:weather][:mean_wind_speed],
-                  precipitation: params[:weather][:precipitation],
-                  date_ref_id: date,
-                )
+    status = ws.update(max_temperature: params[:weather][:max_temperature],
+                       min_temperature: params[:weather][:min_temperature],
+                       mean_temperature: params[:weather][:mean_temperature],
+                       mean_visibility: params[:weather][:mean_visibility],
+                       mean_humidity: params[:weather][:mean_humidity],
+                       mean_wind_speed: params[:weather][:mean_wind_speed],
+                       precipitation: params[:weather][:precipitation],
+                       date_ref_id: date,
+                      )
     [status, ws]
   end
 
@@ -73,6 +72,15 @@ class WeatherStatistic < ActiveRecord::Base
     (((WeatherStatistic.minimum(tag)/div).floor*div)..((WeatherStatistic.maximum(tag)/div).ceil * div)).step(inc).to_a
   end
 
+
+  def self.query_weather(statistic, index, range)
+    WeatherStatistic.joins(:trips)
+              .where("#{statistic} between ? and ?", range[index-1], range[index])
+              .group(:date)
+              .order('count_id ASC')
+              .count(:id).values
+  end
+
   def self.trips_by_weather(range, increment, statistic)
     range.each_with_index.map do |stat, index|
       if index == 0
@@ -83,12 +91,10 @@ class WeatherStatistic < ActiveRecord::Base
     end.compact
   end
 
-  def self.query_weather(statistic, index, range)
-    WeatherStatistic.joins(:trips)
-              .where("#{statistic} between ? and ?", range[index-1], range[index])
-              .group(:date)
-              .order('count_id ASC')
-              .count(:id).values
+  def self.temp_data(data)
+    data[:breakout_avg_max_min_rides_days_high_temp].map do |k,v|
+      [k,v].flatten
+    end
   end
 
   def self.format(hash)

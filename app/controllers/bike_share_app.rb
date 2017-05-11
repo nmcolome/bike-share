@@ -4,16 +4,7 @@ class BikeShareApp < Sinatra::Base
     erb :index
   end
 
-  get '/location' do
-    erb :location
-  end
-
-  post '/go' do
-      @lat = params[:lat]
-      @lon = params[:lon]
-      erb :index
-  end
-
+#api route for individual stations
   get '/api/v1/stations/:id' do
     @station = Station.find(params[:id])
     @trip_individual_data = Station.individual_dashboard(params[:id].to_i)
@@ -70,7 +61,6 @@ class BikeShareApp < Sinatra::Base
     else
       redirect "/stations/#{params[:id]}/edit?errors=#{@station[1]  .errors.full_messages}"
     end
-  
   end
 
 #route to delete single station
@@ -115,7 +105,6 @@ class BikeShareApp < Sinatra::Base
 
 #single trip page
   get '/trips/:id' do
-
     @trip = Trip.find(params[:id])
     erb :'trips/show'
   end
@@ -161,10 +150,7 @@ class BikeShareApp < Sinatra::Base
 #weather dashboard with statistics
   get '/conditions-dashboard' do
     @dashboard_data = WeatherStatistic.dashboard
-    @temp_data =     @dashboard_data[:breakout_avg_max_min_rides_days_high_temp].map do |k,v|
-      [k,v].flatten
-    end
-
+    @temp_data =  WeatherStatistic.temp_data(@dashboard_data)
     erb :'weather/dashboard'
   end
 
@@ -187,7 +173,6 @@ class BikeShareApp < Sinatra::Base
 
 #route after filling new weather form
   post '/conditions' do
-
     @weather = WeatherStatistic.create_new(params)
     if @weather[0]
       redirect "/conditions/#{@weather[1].id}"
@@ -204,7 +189,6 @@ class BikeShareApp < Sinatra::Base
 
 #route to update after editing weather
   put '/conditions/:id' do
-
     @weather = WeatherStatistic.update_record(params)
     if @weather[0]
       redirect "/conditions/#{@weather[1].id}"
@@ -217,6 +201,23 @@ class BikeShareApp < Sinatra::Base
   delete '/conditions/:id' do
     @weather = WeatherStatistic.destroy(params[:id])
     redirect "/conditions"
+  end
+
+
+################
+##Map
+###############
+  
+#call for map interface
+  get '/location' do
+    erb :location
+  end
+
+#map call
+  post '/go' do
+      @lat = params[:lat]
+      @lon = params[:lon]
+      erb :index
   end
 
 end

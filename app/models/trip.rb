@@ -1,4 +1,5 @@
 require 'date'
+
 class Trip<ActiveRecord::Base
 
   belongs_to :bike
@@ -23,17 +24,6 @@ class Trip<ActiveRecord::Base
     "Trip: #{self.id}"
   end
 
-  def self.retrieve_id(id, arg)
-    object={
-      bike: Bike,
-      date: DateRef,
-      zip: Zipcode,
-      sub: SubscriptionType,
-    }
-    new_obj = object[id].find_or_create_by!(arg)
-    new_obj.id
-  end
-
   def self.sterilize(params)
     trip = params[:trip]
     { 
@@ -49,28 +39,26 @@ class Trip<ActiveRecord::Base
 
   def self.create_new(params)
     trip_data = sterilize(params)
-    trip = Trip.new(
-            date_ref_id: trip_data[:start_date],
-            end_date_id: trip_data[:end_date],
-            start_station_id: trip_data[:start_station].id,
-            end_station_id: trip_data[:end_station].id,
-            bike_id: trip_data[:bike],
-            zipcode_id: trip_data[:zipcode],
-            subscription_type_id: trip_data[:subscription])
+    trip = Trip.new(date_ref_id: trip_data[:start_date],
+                    end_date_id: trip_data[:end_date],
+                    start_station_id: trip_data[:start_station].id,
+                    end_station_id: trip_data[:end_station].id,
+                    bike_id: trip_data[:bike],
+                    zipcode_id: trip_data[:zipcode],
+                    subscription_type_id: trip_data[:subscription])
       [trip.save, trip]
   end
 
   def self.update_record(params)
     trip_data = sterilize(params)
     trip = Trip.find(params[:id])
-    status = trip.update(
-        date_ref_id: trip_data[:start_date],
-        end_date_id: trip_data[:end_date],
-        start_station_id: trip_data[:start_station].id,
-        end_station_id: trip_data[:end_station].id,
-        bike_id: trip_data[:bike],
-        zipcode_id: trip_data[:zipcode],
-        subscription_type_id: trip_data[:subscription])
+    status = trip.update(date_ref_id: trip_data[:start_date],
+                         end_date_id: trip_data[:end_date],
+                         start_station_id: trip_data[:start_station].id,
+                         end_station_id: trip_data[:end_station].id,
+                         bike_id: trip_data[:bike],
+                         zipcode_id: trip_data[:zipcode],
+                         subscription_type_id: trip_data[:subscription])
     [status, trip]
   end
 
@@ -151,12 +139,6 @@ class Trip<ActiveRecord::Base
        .count(:id) 
   end
 
-  def self.sort_hash_merge(array)
-    array.map do |k, v| 
-      {k.date => v}
-    end.inject(:merge).first
-  end
-
   def self.trip_date_query(mode)
     Trip.group(:date_ref)
         .order("count_id #{mode}")
@@ -201,6 +183,12 @@ class Trip<ActiveRecord::Base
     "Hours: 00 Min: #{mn} Sec: #{sc}"
   end
 
+  def self.sort_hash_merge(array)
+    array.map do |k, v| 
+      {k.date => v}
+    end.inject(:merge).first
+  end
+
   def self.validate_subscription(subscription)
     if subscription.empty?
       ''
@@ -232,6 +220,17 @@ class Trip<ActiveRecord::Base
       date = date.split('T')[0]
       retrieve_id(:date, date: date)
     end
+  end
+
+  def self.retrieve_id(id, arg)
+    object={
+      bike: Bike,
+      date: DateRef,
+      zip: Zipcode,
+      sub: SubscriptionType,
+    }
+    new_obj = object[id].find_or_create_by!(arg)
+    new_obj.id
   end
 
 end

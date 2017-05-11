@@ -11,7 +11,6 @@ class DateRef < ActiveRecord::Base
     swap(date).join('-')
   end
 
-
   def self.swap(date)
     date[0], date[1], date[2] = date[2], date[0], date[1]
   end

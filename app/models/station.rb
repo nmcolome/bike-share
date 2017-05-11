@@ -11,26 +11,24 @@ class Station < ActiveRecord::Base
   validates :city_id, presence: true
   validates :date_ref_id, presence: true
 
-
   def self.create_new(params)
     date = Station.validate_date(params)
     station = Station.new(name: params[:station][:name],
-                   dock_count: params[:station][:dock_count],
-                   city_id: (params[:station][:city_id]),
-                   date_ref_id: date
-                  )
+                          dock_count: params[:station][:dock_count],
+                          city_id: (params[:station][:city_id]),
+                          date_ref_id: date
+                         )
     [station.save, station]
   end
 
   def self.update_record(params)
     date = Station.validate_date(params)
     station = Station.find(params[:id])
-    status = station.update(
-        name: params[:station][:name],
-        dock_count: params[:station][:dock_count],
-        city_id: (params[:station][:city_id]),
-        date_ref_id: date
-       )
+    status = station.update(name: params[:station][:name],
+                            dock_count: params[:station][:dock_count],
+                            city_id: (params[:station][:city_id]),
+                            date_ref_id: date
+                            )
     [status, station]
   end
 
@@ -59,8 +57,17 @@ class Station < ActiveRecord::Base
     }
   end
 
+  def self.dashboard_subdata
+    {
+      maximum_bikes: Station.maximum(:dock_count),
+      minimum_bikes: Station.minimum(:dock_count),
+      earliest_date: date_query('ASC'),
+      latest_date: date_query('DESC')
+    }
+  end
+
   def self.most_popular(id, group)
-    most_pop = Trip.where(start_station_id: id).group(group).order("count_id DESC").count(:id)
+    most_pop = most_popular_query(id, group)
     if most_pop.empty?
       "n/a"
     else
@@ -68,13 +75,19 @@ class Station < ActiveRecord::Base
     end
   end
 
-  def self.dashboard_subdata
-    {
-      maximum_bikes: Station.maximum(:dock_count),
-      minimum_bikes: Station.minimum(:dock_count),
-      earliest_date: Station.includes(:date_ref).order("date_refs.date ASC").first.date_ref.id,
-      latest_date: Station.includes(:date_ref).order("date_refs.date DESC").first.date_ref.id
-    }
+  def self.date_query(direction)
+    Station.includes(:date_ref)
+           .order("date_refs.date #{direction}")
+           .first
+           .date_ref
+           .id
+  end
+
+  def self.most_popular_query(id, group)
+    Trip.where(start_station_id: id)
+        .group(group)
+        .order("count_id DESC")
+        .count(:id)
   end
 
   def self.validate_name_change(name)
