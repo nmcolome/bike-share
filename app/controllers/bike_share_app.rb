@@ -152,6 +152,7 @@ class BikeShareApp < Sinatra::Base
 #weather dashboard with statistics
   get '/conditions-dashboard' do
     @dashboard_data = WeatherStatistic.dashboard
+    binding.pry
     erb :'weather/dashboard'
   end
 
