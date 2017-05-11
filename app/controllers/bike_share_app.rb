@@ -4,6 +4,17 @@ class BikeShareApp < Sinatra::Base
     erb :index
   end
 
+
+  get '/location' do
+    erb :location
+  end
+
+  post '/go' do
+      @lat = params[:lat]
+      @lon = params[:lon]
+      erb :index
+  end
+
   get '/api/v1/stations/:id' do
     @station = Station.find(params[:id])
     @trip_individual_data = Station.individual_dashboard(params[:id].to_i)
@@ -152,13 +163,10 @@ class BikeShareApp < Sinatra::Base
 #weather dashboard with statistics
   get '/conditions-dashboard' do
     @dashboard_data = WeatherStatistic.dashboard
-<<<<<<< HEAD
-    binding.pry
-=======
     @temp_data =     @dashboard_data[:breakout_avg_max_min_rides_days_high_temp].map do |k,v|
       [k,v].flatten
     end
->>>>>>> 6bb3bfdac975886301b8829d864feace84dc626a
+
     erb :'weather/dashboard'
   end
 
