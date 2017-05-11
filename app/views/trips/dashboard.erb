@@ -14,15 +14,28 @@
   <p>Shortest ride:</p>
   <p>Started at: <%= @trips_dashboard_data[:shortest_ride][:start]%>, Ended at: <%= @trips_dashboard_data[:shortest_ride][:end]%></p>
   <p>Duration: <%= @trips_dashboard_data[:shortest_ride][:duration]%>  </p>
+
+
+  <p>Single date with highest number of trips:</p>
+  <p>Date: <%= @trips_dashboard_data[:top_trip_date][0].strftime("%B %d, %Y")%> </p>
+  <p>Trips: <%= @trips_dashboard_data[:top_trip_date][1]%></p>
+  <p>Single date with lowest number of trips:</p>
+  <p>Date: <%= @trips_dashboard_data[:lowest_trip_date][0].strftime("%B %d, %Y")%> </p>
+  <p>Trips: <%= @trips_dashboard_data[:lowest_trip_date][1]%></p>
+
+  <p>Most ridden bike with total number of rides: <%=	@trips_dashboard_data[:most_ridden_bike]  %></p>
+  <p>Least ridden bike with total number of rides: <%=	 @trips_dashboard_data[:least_ridden_bike] %></p>
+
+  <p>Stations with the most ride as a starting place: <%= @trips_dashboard_data[:popular_starting_station] %></p>
+  <p>Station with the most ride as an ending place: <%=	@trips_dashboard_data[:popular_ending_station]  %></p>
 </div>
 
 
 <div class="container all-stations trips-dashboard">
   <div class="panel">
     <div class="panel-heading stations-panel">Month by Month Breakdown</div>
-    <p>Stations with the most ride as a starting place: <%= @trips_dashboard_data[:popular_starting_station] %></p>
-    <p>Station with the most ride as an ending place: <%=	@trips_dashboard_data[:popular_ending_station]  %></p>
-    <p>Month by month breakdown of number of rides with subtotals for each year:</p></<br>
+ 
+    <h3>Month by month breakdown of number of rides with subtotals for each year:</h3></<br>
     <% @trips_dashboard_data[:month_breakdown].each do |year, months|%>
     <h3><%= year.to_i %></h3>
       <table class="table table-striped table-hover table-condensed table-bordered">
@@ -38,10 +51,11 @@
       <%end%>
     </table>
     <%end%>
-
-    <p>Most ridden bike with total number of rides: <%=	@trips_dashboard_data[:most_ridden_bike]  %></p>
-    <p>Least ridden bike with total number of rides: <%=	 @trips_dashboard_data[:least_ridden_bike] %></p>
-    <p>User subscription type:</p>
+    <br>
+    <hr>
+    <br>
+    
+    <h3>User subscription type:</h3>
     <table class="table table-striped table-hover table-condensed table-bordered">
       <tr>
         <th>Items</th>
@@ -60,11 +74,4 @@
         <td><%=	 @trips_dashboard_data[:subscription_breakout].values[1][1] %></td>
       </tr>
     </table>
-
-    <p>Single date with highest number of trips:</p>
-    <p>Date: <%= @trips_dashboard_data[:top_trip_date][0].strftime("%B %d, %Y")%> </p>
-    <p>Trips: <%= @trips_dashboard_data[:top_trip_date][1]%></p>
-    <p>Single date with lowest number of trips:</p>
-    <p>Date: <%= @trips_dashboard_data[:lowest_trip_date][0].strftime("%B %d, %Y")%> </p>
-    <p>Trips: <%= @trips_dashboard_data[:lowest_trip_date][1]%></p>
 </div>

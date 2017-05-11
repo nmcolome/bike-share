@@ -17,7 +17,7 @@ body {
     -o-background-size: cover;
     background-size: cover;
     margin: 0;
-    color: whitesmoke;
+    color: #212121;
 }
 
 .navbar-brand {
@@ -60,37 +60,36 @@ body {
   ========================================
 */
 
-#home-header {
-    color: #1e1e1e;
-    font-size: 200px;
-    line-height: 1;
-    font-weight: 700;
-    text-align: left;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px white;
-    margin-top: 90px;
-}
 
-.home-link {
-    display: inline;
-    border: 3px solid black;
-    border-radius: 10px;
-    padding: 5px;
-    background: lightblue;
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px black;
-    font-weight: 400;
-    font-size: 25px;
-}
+/*h1#home-header {*/
 
-.home-link a {
-    color: #FFFFFF;
-    text-decoration: none;
-}
 
-.home-link a:hover {
-    color: black;
+/*display: flex;*/
+
+
+/*flex-direction: row;*/
+
+
+/*justify-content: center;*/
+
+
+/*margin: 10%;*/
+
+
+/*align-items: center;*/
+
+
+/*color: whitesmoke;*/
+
+
+/*font-size: 5rem;*/
+
+
+/*}*/
+
+img#home-header {
+    display: block;
+    margin: 10% auto;
 }
 
 
@@ -111,7 +110,7 @@ body {
 .top {
     position: relative;
     width: 100%;
-    background-color: rgb(74, 189, 172);
+    background-color: rgb(89, 0, 111);
     height: 250px;
     opacity: 1;
     text-align: center;
@@ -125,9 +124,9 @@ body {
 }
 
 .page-header h1 {
-    font-size: 1rem;
+    font-size: 40px;
     font-weight: 700;
-    color: #414141;
+    color: whitesmoke;
 }
 
 .all-stations {
@@ -135,7 +134,7 @@ body {
 }
 
 .panel-heading {
-    background-color: #056571;
+    background-color: rgb(89, 0, 111);
     color: #FFCE00;
     text-align: left;
 }
@@ -148,6 +147,11 @@ body {
     font-size: 15px;
     color: black;
     text-align: center;
+}
+
+.all-stations tr,
+td a {
+    color: #1e1e1e;
 }
 
 #station-name-header {
@@ -210,20 +214,17 @@ body {
   ========================================
 */
 
-.stations-show-bg {
-    background: url("/assets/images/old_bike.jpg") no-repeat center center fixed;
-}
-
 .station-box {
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(33, 33, 33, 0.9);
     width: 60%;
     padding: 30px;
-    border: 6px solid black;
+    border: 2px solid black;
     border-radius: 10px;
     margin-top: 15px;
     margin-bottom: 100px;
     font-size: 20px;
+    color: whitesmoke;
 }
 
 .station-box p {
@@ -232,6 +233,10 @@ body {
 
 .dashboard-value {
     color: red;
+}
+
+#station-name-header .page-header .top {
+    font-size: 2rem;
 }
 
 
@@ -262,13 +267,22 @@ body {
 
 .new-station {
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(33, 33, 33, 0.9);
     width: 40%;
     padding: 30px;
-    border: 6px solid black;
+    border: 2px solid black;
     border-radius: 10px;
     margin-bottom: 100px;
-    font-size: 20px;
+    font-size: 1.2rem;
+    color: whitesmoke;
+}
+
+.btn-primary {
+    background-color: #00BBFF;
+}
+
+.btn-primary button:hover {
+    background-color: #1e1e1e;
 }
 
 
@@ -280,18 +294,25 @@ body {
 
 .stations-dashboard {
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(33, 33, 33, 0.9);
     width: 60%;
     padding: 30px;
-    border: 6px solid black;
+    border: 2px solid black;
     border-radius: 10px;
     margin-top: 15px;
     margin-bottom: 100px;
     font-size: 20px;
 }
 
-.stations-dashboard p {
+.stations-dashboard p,
+li,
+a {
     text-align: left;
+    color: whitesmoke;
+}
+
+a button {
+    color: #1e1e1e;
 }
 
 
@@ -364,7 +385,7 @@ body {
 .new-trip {
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.9);
-    width: 40%;
+    width: 60%;
     padding: 30px;
     border: 6px solid black;
     border-radius: 10px;
@@ -372,8 +393,14 @@ body {
     font-size: 20px;
 }
 
+.form-horizontal .control-label {
+    color: whitesmoke;
+}
+
 .form-group .form-control {
     max-width: 100%;
+    background-color: #1e1e1e;
+    color: whitesmoke;
 }
 
 
@@ -398,17 +425,9 @@ body {
 input,
 button,
 select,
-textarea {
-    color: #555;
-}
+textarea {}
 
-/*
-  ========================================
-  Error
-  ========================================
-*/
-
-.thing {
+.error {
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.9);
     width: 40%;
@@ -417,4 +436,5 @@ textarea {
     border-radius: 10px;
     margin-bottom: 100px;
     font-size: 20px;
+    color: red;
 }

@@ -3,31 +3,69 @@
   <h1 class="title text-left">Edit Trip Weather</h1><br/>
 </div>
 
-<h2>Weather:
-    <%= @weather.id %>
-</h2>
-
-<form action="/conditions/<%= @weather.id %>" method="post">
-  <input type="hidden" name="_method" value="PUT" />
-  <label for="">Maximum Temperature (deg F):</label>
-  <input type="float" name="weather[max_temperature]" value="<%= @weather.max_temperature %>"
-  <label for="">Average Temperature (deg F):</label>
-  <input type="float" name="weather[mean_temperature]" value="<%= @weather.mean_temperature %>"
-  <label for="">Minimum Temperature (deg F):</label>
-  <input type="float" name="weather[min_temperature]" value="<%= @weather.min_temperature %>"
-  <label for="">Average Humidity (percentage):</label>
-  <input type="float" name="weather[mean_humidity]" value="<%= @weather.mean_humidity %>"
-  <label for="">Average Visibility (miles):</label>
-  <input type="float" name="weather[mean_visibility]" value="<%= @weather.mean_visibility %>"
-  <label for="">Average Wind Speed (mph):</label>
-  <input type="float" name="weather[mean_wind_speed]" value="<%= @weather.mean_wind_speed %>"
-  <label for="">Precipitation (inches):</label>
-  <input type="float" name="weather[precipitation]" value="<%= @weather.precipitation %>"
-  <label for="">Date:</label>
-  <input type="date" name="weather[date_ref_id]" value="<%= @weather.date_ref.date %>">
-  <input type="submit" value="Edit Weather"/>
-</form>
-
 <% if params['errors'] %>
+<div class="container error">
 <%= erb :'errors/error'%>
+</div>
 <%end%>
+
+<div class="panel-heading stations-panel">Weather ID: <%= @weather.id %></div>
+
+<div class="container new-station">
+  <form class="form-horizontal" action="/conditions/<%= @weather.id %>" method="post">
+  <input type="hidden" name="_method" value="PUT" />
+    <div class="form-group" id="form-group">
+    <label class="col-sm-2 control-label" for="max_temp">Maximum Temperature (deg F):</label>
+      <div class="col-sm-10">
+        <input id='max_temp'class="form-control" type="float" name="weather[max_temperature]" value="<%= @weather.max_temperature %>">
+      </div>
+    </div>
+    <div class="form-group" id="form-group">
+      <label class="col-sm-2 control-label" for="ave_temp">Average Temperature (deg F):</label>
+      <div class="col-sm-10">
+        <input class="form-control" id='ave-temp' type="float" id='ave_temp' name="weather[mean_temperature]" value="<%= @weather.mean_temperature %>">
+      </div>
+    </div>
+    <div class="form-group" id="form-group">
+      <label class="col-sm-2 control-label"for="min_temp">Minimum Temperature (deg F):</label>
+      <div class="col-sm-10">
+        <input class="form-control" id='min_temp' type="float" name="weather[min_temperature]" value="<%= @weather.min_temperature %>">
+      </div>
+    </div>
+    <div class="form-group" id="form-group">
+      <label class="col-sm-2 control-label" for="ave_humi">Average Humidity (percentage):</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="float" id='ave_humi' name="weather[mean_humidity]" value="<%= @weather.mean_humidity %>">
+      </div>
+    </div>
+    <div class="form-group" id="form-group">
+      <label class="col-sm-2 control-label"for="ave_visibility">Average Visibility (miles):</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="float" id='ave_visibility' name="weather[mean_visibility]" value="<%= @weather.mean_visibility %>">
+      </div>
+    </div>
+    <div class="form-group" id="form-group">
+      <label class="col-sm-2 control-label" for="ave_wind">Average Wind Speed (mph):</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="float" id='ave_wind' name="weather[mean_wind_speed]" value="<%= @weather.mean_wind_speed %>">
+      </div>
+    </div>
+    <div class="form-group" id="form-group">
+      <label class="col-sm-2 control-label" for="precipitation">Precipitation (inches):</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="float" id='precipitation' name="weather[precipitation]" value="<%= @weather.precipitation %>">
+      </div>
+    </div>
+    <div class="form-group" id="form-group">
+      <label class="col-sm-2 control-label" for="date">Date:</label>
+      <div class="col-sm-10">
+        <input class="form-control" id='date' type="date" name="weather[date_ref_id]" value="<%= @weather.date_ref.date %>">
+      </div>
+    </div>
+    <div class="form-group" id="form-group">
+      <div class="col-sm-10 col-sm-offset-2">
+        <input class="btn btn-primary" type="submit" value="Edit Weather" >
+      </div>
+    </div>
+  </form>
+</div>

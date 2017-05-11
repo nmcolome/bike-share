@@ -11,16 +11,14 @@ html {
 }
 
 body {
-
-  background: url("../assets/images/pexels-photo-165541.jpeg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  margin: 0;
-  color: #212121;
-
-
+    background: url("../assets/images/pexels-photo-165541.jpeg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0;
+    color: #212121;
+}
 
 .navbar-brand {
     padding: 0px 15px;
@@ -64,23 +62,36 @@ body {
 
 
 /*h1#home-header {*/
-  /*display: flex;*/
-  /*flex-direction: row;*/
-  /*justify-content: center;*/
-  /*margin: 10%;*/
-  /*align-items: center;*/
-  /*color: whitesmoke;*/
-  /*font-size: 5rem;*/
+
+
+/*display: flex;*/
+
+
+/*flex-direction: row;*/
+
+
+/*justify-content: center;*/
+
+
+/*margin: 10%;*/
+
+
+/*align-items: center;*/
+
+
+/*color: whitesmoke;*/
+
+
+/*font-size: 5rem;*/
+
+
 /*}*/
 
 img#home-header {
-  /*display: flex;*/
-  /*flex-direction: row;*/
-  /*justify-content: center;*/
-  /*align-items: center;*/
-  display: block;
-  margin: 10% auto;
+    display: block;
+    margin: 10% auto;
 }
+
 
 /*
   ========================================
@@ -113,11 +124,9 @@ img#home-header {
 }
 
 .page-header h1 {
-
-  font-size: 40px;
-  font-weight: 700;
-  color: whitesmoke;
-
+    font-size: 40px;
+    font-weight: 700;
+    color: whitesmoke;
 }
 
 .all-stations {
@@ -206,18 +215,16 @@ td a {
 */
 
 .station-box {
-  margin: 0 auto;
-  background-color: rgba(33, 33, 33, 0.9);
-  width: 60%;
-  padding: 30px;
-  border: 2px solid black;
-  border-radius: 10px;
-  margin-top: 15px;
-  margin-bottom: 100px;
-  font-size: 20px;
-  color: whitesmoke;
-
-
+    margin: 0 auto;
+    background-color: rgba(33, 33, 33, 0.9);
+    width: 60%;
+    padding: 30px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 100px;
+    font-size: 20px;
+    color: whitesmoke;
 }
 
 .station-box p {
@@ -227,9 +234,11 @@ td a {
 .dashboard-value {
     color: red;
 }
+
 #station-name-header .page-header .top {
-  font-size: 2rem;
+    font-size: 2rem;
 }
+
 
 /*
   ========================================
@@ -417,5 +426,18 @@ input,
 button,
 select,
 textarea {
-    color: #555;
+
 }
+
+.error {
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 40%;
+    padding: 30px;
+    border: 6px solid black;
+    border-radius: 10px;
+    margin-bottom: 100px;
+    font-size: 20px;
+    color: red;
+}
+
