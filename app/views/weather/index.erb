@@ -1,0 +1,48 @@
+<div class="page-header top">
+  <h1 class="title text-left">All Conditions</h1><br/>
+</div>
+
+<div class="container all-trips">
+  <div class="panel">
+    <a href="/"><button class="btn btn-default">Home</button></a>
+    <a href="/conditions/new"><button class="btn btn-primary">Add Weather</button></a>
+    <a href="/conditions-dashboard"><button class="btn btn-info">Weather Dashboard</button></a>
+    <div class="panel-heading stations-panel">Conditions</div>
+
+    <table class="table table-striped table-hover table-condensed">
+      <tr>
+        <th>Weather ID</th>
+        <th>Date</th>
+        <th>Maximum Temperature</th>
+        <th>Minimum Temperature</th>
+        <th>Average Temperature</th>
+        <th>Average Humidity</th>
+        <th>Average Visibility</th>
+        <th>Average Wind Speed</th>
+        <th>Precipitation</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      <% @weather.each do |weather| %>
+        <tr class="weather">
+          <td><a href="/conditions/<%= weather.id %>"><%= weather.id %></a></td>
+          <td><%= weather.date_ref.date %></td>
+          <td><%= weather.max_temperature %></td>
+          <td><%= weather.min_temperature %></td>
+          <td><%= weather.mean_temperature %></td>
+          <td><%= weather.mean_humidity %></td>
+          <td><%= weather.mean_visibility %></td>
+          <td><%= weather.mean_wind_speed %></td>
+          <td><%= weather.precipitation %></td>
+          <td><a href="/conditions/<%= weather.id %>/edit"><button class="btn btn-warning">Edit</button></a></td>
+          <td>
+            <form action="/conditions/<%= weather.id %>" method="POST">
+              <input type="hidden" name="_method" value="DELETE">
+              <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="page-header top">
+  <h1 class="title">Stations Dashboard</h1><br/>
+</div>
+
+<div class="container all-stations trips-dashboard">
+  <div class="panel">
+    <div class="panel-heading stations-panel">Breakdown of Ride Data</div>
+    
+    <%= erb :'charts/chart_temp'%>
+    
+    <h3>Ride Stats Based on Temperature</h3>
+
+    <table class="table table-striped table-hover table-condensed table-bordered">
+      <tr>
+        <th>Temperature Range (degree F)</th>
+        <th>Maximum Rides</th>
+        <th>Average Rides</th>
+        <th>Minimum Rides</th>
+      </tr>
+      <% @dashboard_data[:breakout_avg_max_min_rides_days_high_temp].each do |range, rides| %>
+        <tr class="conditions">
+          <td><%= range %></td>
+          <td><%= rides[0] %></td>
+          <td><%= rides[2] %></td>
+          <td><%= rides[1] %></td>
+        </tr>
+      <% end %>
+    </table></br>
+    <div id="temp_div" style="width: 100%; height: 250px; display:inline-block;"></div>
+
+    <h3>Ride Stats Based on Precipitation
+    </h3>
+
+    <table class="table table-striped table-hover table-condensed table-bordered">
+      <tr>
+        <th>Precipitation Range (inches)</th>
+        <th>Maximum Rides</th>
+        <th>Average Rides</th>
+        <th>Minimum Rides</th>
+      </tr>
+      <% @dashboard_data[:breakout_avg_max_min_rides_days_precipitation].each do |range, rides| %>
+        <tr class="conditions">
+          <td><%= range %></td>
+          <td><%= rides[0] %></td>
+          <td><%= rides[2] %></td>
+          <td><%= rides[1] %></td>
+        </tr>
+      <% end %>
+    </table></br>
+<div id="precip_div" style="width: 100%; height: 250px;display:inline-block;"></div>
+
+    <h3>Ride Stats Based on Wind Speed
+    </h3>
+    <table class="table table-striped table-hover table-condensed table-bordered">
+      <tr>
+        <th>Wind Speed Range (mph)</th>
+        <th>Maximum Rides</th>
+        <th>Average Rides</th>
+        <th>Minimum Rides</th>
+      </tr>
+      <% @dashboard_data[:breakout_avg_max_min_rides_days_wind_speed].each do |range, rides| %>
+        <tr class="conditions">
+          <td><%= range %></td>
+          <td><%= rides[0] %></td>
+          <td><%= rides[2] %></td>
+          <td><%= rides[1] %></td>
+        </tr>
+      <% end %>
+    </table></br>
+    <div id="wind_div" style="width: 100%; height: 250px;display:inline-block;"></div>
+
+
+    <h3>Ride Stats Based on Visibility
+    </h3>
+    <table class="table table-striped table-hover table-condensed table-bordered">
+      <tr>
+        <th>Visibility Range (miles)</th>
+        <th>Maximum Rides</th>
+        <th>Average Rides</th>
+        <th>Minimum Rides</th>
+      </tr>
+      <% @dashboard_data[:breakout_avg_max_min_rides_days_visibility].each do |range, rides| %>
+        <tr class="conditions">
+          <td><%= range %></td>
+          <td><%= rides[0] %></td>
+          <td><%= rides[2] %></td>
+          <td><%= rides[1] %></td>
+        </tr>
+      <% end %>
+    </table>
+    <div id="visib_div" style="width: 100%; height: 250px;display:inline-block;"></div>
+
+</div>

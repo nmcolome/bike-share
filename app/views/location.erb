@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo">Getting your location... </p>
+<div id="mapholder"></div>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTFQQraBe2fCDiah47XNrdaq5JUpk3R5U&callback=initMap"
+  type="text/javascript"></script>
+
+<script>
+var lats = [[37.329732, -121.901782, "San Jose Diridon Caltrain Station", 142], [37.330698, -121.888979, "San Jose Civic Center", 143], [37.333988, -121.894902, "Santa Clara at Almaden", 144], [37.331415, -121.8932, "Adobe on Almaden", 145], [37.336721, -121.894074, "San Pedro Square", 146], [37.333798, -121.886943, "Paseo de San Antonio", 147], [37.330165, -121.885831, "San Salvador at 1st", 148], [37.348742, -121.894715, "Japantown", 149], [37.337391, -121.886995, "San Jose City Hall", 150], [37.335885, -121.88566, "MLK Library", 151], [37.332808, -121.883891, "SJSU 4th at San Carlos", 152], [37.339301, -121.889937, "St James Park", 153], [37.332692, -121.900084, "Arena Green / SAP Center", 154], [37.333955, -121.877349, "SJSU - San Salvador at 9th", 155], [37.481758, -122.226904, "Franklin at Maple", 156], [37.486078, -122.232089, "Redwood City Caltrain Station", 157], [37.487616, -122.229951, "San Mateo County Center", 158], [37.484219, -122.227424, "Redwood City Public Library", 159], [37.48537, -122.203288, "Stanford in Redwood City", 160], [37.487682, -122.223492, "Redwood City Medical Center", 161], [37.389218, -122.081896, "Mountain View City Hall", 162], [37.394358, -122.076713, "Mountain View Caltrain Station", 163], [37.40694, -122.106758, "San Antonio Caltrain Station", 164], [37.390277, -122.066553, "Evelyn Park and Ride", 165], [37.400443, -122.108338, "San Antonio Shopping Center", 166], [37.385956, -122.083678, "Castro Street and El Camino Real", 167], [37.400241, -122.099076, "Rengstorff Avenue / California Street", 168], [37.443988, -122.164759, "Palo Alto Caltrain Station", 169], [37.444521, -122.163093, "University and Emerson", 170], [37.429082, -122.142805, "California Ave Caltrain Station", 171], [37.448598, -122.159504, "Cowper at University", 172], [37.4256839, -122.1377775, "Park at Olive", 173], [37.795001, -122.39997, "Clay at Battery", 174], [37.79728, -122.398436, "Davis at Jackson", 175], [37.794231, -122.402923, "Commercial at Montgomery", 176], [37.795425, -122.404767, "Washington at Kearney", 177], [37.788975, -122.403452, "Post at Kearney", 178], [37.799953, -122.398525, "Embarcadero at Vallejo", 179], [37.790302, -122.390637, "Spear at Folsom", 180], [37.795392, -122.394203, "Harry Bridges Plaza (Ferry Building)", 181], [37.791464, -122.391034, "Embarcadero at Folsom", 182], [37.783871, -122.408433, "Powell Street BART", 183], [37.787152, -122.388013, "Embarcadero at Bryant", 184], [37.789756, -122.394643, "Temporary Transbay Terminal (Howard at Beale)", 185], [37.792251, -122.397086, "Beale at Market", 186], [37.781752, -122.405127, "5th at Howard", 187], [37.77865, -122.418235, "San Francisco City Hall", 188], [37.781332, -122.418603, "Golden Gate at Polk", 189], [37.80477, -122.403234, "Embarcadero at Sansome", 190], [37.780526, -122.390288, "2nd at Townsend", 191], [37.785299, -122.396236, "2nd at Folsom", 192], [37.786978, -122.398108, "Howard at 2nd", 193], [37.782259, -122.392738, "2nd at South Park", 194], [37.771058, -122.402717, "Townsend at 7th", 195], [37.774814, -122.418954, "South Van Ness at Market", 196], [37.776619, -122.417385, "Market at 10th", 197], [37.784878, -122.401014, "Yerba Buena Center of the Arts (3rd @ Howard)", 198], [37.7766, -122.39547, "San Francisco Caltrain 2 (330 Townsend)", 199], [37.776617, -122.39526, "San Francisco Caltrain (Townsend at 4th)", 200], [37.788446, -122.408499, "Powell at Post (Union Square)", 201], [37.781039, -122.411748, "Civic Center BART (7th at Market)", 202], [37.798522, -122.407245, "Grant Avenue at Columbus Avenue", 203], [37.794139, -122.394434, "Steuart at Market", 204], [37.7913, -122.399051, "Mechanics Plaza (Market at Battery)", 205], [37.786305, -122.404966, "Market at 4th", 206], [37.789625, -122.400811, "Market at Sansome", 207], [37.352601, -121.905733, "Santa Clara County Civic Center", 208], [37.798541, -122.400862, "Broadway St at Battery St", 209], [37.491269, -122.236234, "Mezes Park", 210], [37.342725, -121.895617, "Ryland Park", 211]];
+
+var latlongObject = lats.map(function(position) {
+  return [new google.maps.LatLng(position[0], position[1]), position[2], `/stations/${position[3]}`]
+})
+
+getLocation();
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition,showError);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";}
+}
+
+function showPosition(position) {
+    var mapholder = document.getElementById('mapholder')
+
+    <%#lat = position.coords.latitude;
+    lon = position.coords.longitude;
+    document.getElementById('lat').value = lat;
+    document.getElementById('lon').value = lon;%>
+
+    var latlon = new google.maps.LatLng(37.790302, -122.390637)
+
+    mapholder.style.height='500px';
+    mapholder.style.width='100%';
+
+    var myOptions={
+    center:latlon,zoom:14,
+    mapTypeId:google.maps.MapTypeId.ROADMAP,
+    mapTypeControl:false,
+    navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+    }
+
+    var map = new google.maps.Map(document.getElementById("mapholder"),myOptions);
+
+    latlongObject.forEach(function(e, i) {
+      var contentString = `<div><a href="${e[2]}">${e[1]}</a></div>`;
+      var infowindow = new google.maps.InfoWindow()
+      marker = new google.maps.Marker({position:e[0],map:map,title:`${e[1]}`});
+      google.maps.event.addListener(marker,'click', (function(marker,contentString,infowindow){
+    return function() {
+        infowindow.setContent(contentString);
+        infowindow.open(map,marker);
+    };
+})(marker,contentString,infowindow));
+   
+    })
+
+}
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+    }
+
+}
+</script>
+
+</body>
+</html>

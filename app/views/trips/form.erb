@@ -1,0 +1,43 @@
+<h1>All Trips</h1>
+<a href="/"><button>Home</button></a>
+<a href="/trips/new"><button>Add Trips</button></a>
+<a href="/trips-dashboard"><button>Trips Dashboard</button></a>
+
+
+<table>
+  <tr>
+    <th>Trip ID</th>
+    <th>Start Date</th>
+    <th>Start Station</th>
+    <th>End Date </th>
+    <th>End Station</th>
+    <th>Bike</th>
+    <th>Subsciption</th>
+    <th>Zipcode</th>
+  </tr>
+
+  <% @trips.each do |trip| %>
+    <tr class="trip">
+      <td>
+      <a href="/trips/<%= trip.id %>">Trip <%=trip.id%>
+      </a>
+      </td>
+
+      <td><%= trip.date_ref.date %></td>
+      <td><%= trip.start_station.name%></td>
+      <td><%= trip.end_date.date %></td>
+      <td><%= trip.end_station.name %></td>
+      <td><%= trip.bike.bike %></td>
+      <td><%= trip.subscription_type.sub_type %></td>
+      <td><%= trip.zipcode.zipcode unless trip.zipcode.nil? %></td>
+      
+      <td><a href="/trips/<%= trip.id %>/edit"><button>Edit</button></a></td>
+      <td>
+        <form action="/trips/<%= trip.id %>" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="Delete">
+        </form>
+      </td>
+    </tr>
+  <% end %>
+</table>

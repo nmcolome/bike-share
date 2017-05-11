@@ -23,7 +23,7 @@ RSpec.describe "When a user visits '/stations'" do
 
   it "takes you to dashboard page" do
     visit('/stations')
-    click_link "Dashboard"
+    click_link "Stations Dashboard"
 
     expect(current_path).to eq('/stations-dashboard')
   end

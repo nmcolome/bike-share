@@ -1,0 +1,23 @@
+<div class="page-header top">
+  <h1 id="station_name_header" class="title text-left"><%= @weather.id %></h1><br/>
+</div>
+
+<div class="container">
+  <div class="station-box text-center">
+    <h2>Info</h2>
+    <p>Date: <%= @weather.date_ref.date%></p>
+    <p>Maximum Temperature: <%= @weather.max_temperature%></p>
+    <p>Minimum Temperature: <%= @weather.min_temperature%></p>
+    <p>Average Temperature: <%= @weather.mean_temperature%></p>
+    <p>Average Humidity: <%= @weather.mean_humidity%></p>
+    <p>Average Visibility: <%= @weather.mean_visibility%></p>
+    <p>Average Wind Speed: <%= @weather.mean_wind_speed%></p>
+    <p>Precipitation: <%= @weather.precipitation%></p>
+
+    <input class="button_active btn btn-warning" onclick="location.href='/conditions/<%= @weather.id %>/edit';" type="button" value="Edit">
+    <form action="/conditions/<%= @weather.id %>" method="POST">
+      <input type="hidden" name="_method" value="DELETE">
+      <input class="btn btn-danger" type="submit" value="Delete">
+    </form>
+  </div>
+</div>

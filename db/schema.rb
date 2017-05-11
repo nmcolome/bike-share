@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170507190453) do
+ActiveRecord::Schema.define(version: 20170510000551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,8 +40,11 @@ ActiveRecord::Schema.define(version: 20170507190453) do
     t.integer  "city_id"
     t.float    "lat"
     t.float    "long"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "location_type"
+    t.integer  "location_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["location_type", "location_id"], name: "index_stations_on_location_type_and_location_id", using: :btree
   end
 
   create_table "subscription_types", force: :cascade do |t|
@@ -63,8 +66,21 @@ ActiveRecord::Schema.define(version: 20170507190453) do
     t.datetime "updated_at",           null: false
   end
 
+  create_table "weather_statistics", force: :cascade do |t|
+    t.integer  "date_ref_id"
+    t.float    "max_temperature"
+    t.float    "mean_temperature"
+    t.float    "min_temperature"
+    t.float    "mean_humidity"
+    t.float    "mean_visibility"
+    t.float    "mean_wind_speed"
+    t.float    "precipitation"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "zipcodes", force: :cascade do |t|
-    t.integer  "zipcode"
+    t.string   "zipcode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

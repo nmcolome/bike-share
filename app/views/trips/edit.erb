@@ -1,0 +1,100 @@
+<div class="page-header top">
+  <h1 class="title text-left">Edit a Trip</h1><br/>
+</div>
+
+<% if params['errors'] %>
+<div class="container error">
+<%= erb :'errors/error'%>
+</div>
+<%end%>
+
+<div class="panel-heading stations-panel">Trip: <%= @trip.id %></div>
+
+<div class="container new-station">
+  <form class="form-horizontal" action="/trips/<%= @trip.id %>" method="post">
+    <input type="hidden" name="_method" value="PUT" />
+    <div class="form-group" id="form-group">
+    <label for="start_date" class="col-sm-2 control-label">Start Date:</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="date" name="trip[start_date]" value="<%= @trip.date_ref.date.to_param %>">
+      </div>
+    </div>
+
+<div class="form-group" id="form-group">
+<label class="col-sm-2 control-label" for="end_date">End Date:</label>
+  <div class="col-sm-10">
+    <input class="form-control" type="date" name="trip[end_date]" value="<%= @trip.end_date.date.to_param %>">
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label" for="">Bike:</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="textfield" name="trip[bike]" value="<%= @trip.bike.bike %>">
+    </div>
+  </div>
+  <div class="form-group">
+      <%if @trip.zipcode%>
+      <label class="col-sm-2 control-label" for="">Zipcode:</label>
+      <div class="col-sm-10">
+      <input class="form-control type="textfield" name="trip[zipcode]" value="<%= @trip.zipcode.zipcode%>">
+      <%end%>
+    </div>
+  </div>
+<div class="form-group">
+  <label class="col-sm-2 control-label" for="start_station">Start Station:</label>
+  <div class="col-sm-10">
+  <select name="trip[start_station]">
+  <% @stations.each do |station| %>
+      <% if station.id == @trip.start_station.id %>
+        <option value="<%= station.id%>"selected="selected">
+        <%= station.name %>
+        </option>
+      <%else%>
+        <option value="<%= station.id%>">
+        <%= station.name %>
+        </option>
+      <% end %>
+  <% end %>
+</select>
+</div>
+</div>
+<div class="form-group">
+  <label for="end_station" class="col-sm-2 control-label">End Station:</label>
+    <div class="col-sm-10">
+      <select name="trip[end_station]">
+      <% @stations.each do |station| %>
+           <% if station.id == @trip.end_station.id %>
+            <option value="<%= station.id%>"selected="selected">
+            <%= station.name %>
+            </option>
+          <%else%>
+            <option value="<%= station.id%>">
+            <%= station.name %>
+            </option>
+          <% end %>
+      <% end %>
+    </select>
+  </div>
+</div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="">Subscription:</label>
+      <div class="col-sm-10">
+      <select name="trip[subscription]">
+      <% @subscriptions.each do |subscription| %>
+        <% if subscription.id == @trip.subscription_type.id %>
+            <option value="<%= subscription.sub_type %>" selected="selected">
+            <%= subscription.sub_type %>
+            </option>
+        <%else%>
+            <option value="<%= subscription.sub_type%>">
+            <%= subscription.sub_type %>
+            </option>
+          <% end %>
+      <% end %>
+    </select>
+  </div>
+</div>
+
+      <input class="btn btn-primary" type="submit" value="Edit Trip" >
+  </form>
+</div>

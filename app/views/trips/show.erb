@@ -1,0 +1,25 @@
+<div class="page-header top">
+  <h1 id="station_name_header" class="title text-left">Trip: <%= @trip.id %></h1><br/>
+</div>
+
+<div class="container">
+  <div class="station-box text-center">
+    <h2>Info</h2>
+          <p>Start Date: <%= @trip.date_ref.date %></p>
+          <p>Start Station: <%= @trip.start_station.name%></p>
+          <p>End Date: <%= @trip.end_date.date %></p>
+          <p>End Station: <%= @trip.end_station.name %></p>
+          <p>Bike ID: <%= @trip.bike.bike %></p>
+          <p>Subscripton Type: <%= @trip.subscription_type.sub_type %></p>
+          <% if @trip.zipcode %>
+          <p>Zipcode <%= @trip.zipcode.zipcode %></p>
+          <%end%>
+    <input class="button_active btn btn-warning" onclick="location.href='/trips/<%= @trip.id %>/edit';" type="button" value="Edit">
+    <form action="/trips/<%= @trip.id %>" method="POST">
+      <input type="hidden" name="_method" value="DELETE">
+      <input class="btn btn-danger" type="submit" value="Delete">
+    </form>
+  </div>
+</div>
+
+

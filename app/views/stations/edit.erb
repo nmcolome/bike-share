@@ -1,20 +1,57 @@
-<h1>Edit a Station</h1>
+<div class="page-header top">
+  <h1 class="title text-left">Edit a Station</h1><br/>
+</div>
 
-<form action="/stations/<%= @station.id %>" method="post">
+<% if params['errors'] %>
+<div class="container error">
+<%= erb :'errors/error'%>
+</div>
+<%end%>
+
+<div class="container new-station">
+  <form class="form-horizontal" action="/stations/<%= @station.id %>" method="post">
   <input type="hidden" name="_method" value="PUT" />
-  <label for="">Name:</label>
-  <input type="textfield" name="station[name]" value="<%= @station.name %>">
-  <label for="">Dock count:</label>
-  <input type="textfield" name="station[dock_count]" value="<%= @station.dock_count %>">
-  <label for="">Installation Date:</label>
-  <input type="date" name="station[installation_date]" value="<%= @station.date_ref.date %>">
-  <select name="station[city_id]">
-    <option value=<%=@station.city.id%> selected="selected"><%= @station.city.name%></option>
-    <% @city.each do |city| %>
-      <option value=<%= city.id %>>
-        <%= city.name %>
-      </option>
-    <% end %>
-  </select>
-  <input type="submit" value="Edit Station" />
-</form>
+    <div class="form-group">
+      <label for="station_name" class="col-sm-2 control-label">Station Name:</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="textfield" name="station[name]" id=station_name value="<%= @station.name %>">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="dock_count">Dock Count:</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="textfield" name="station[dock_count]" value="<%= @station.dock_count %>">
+      </div>
+    </div>
+    <div class="form-group" id="form-group">
+    <label class="col-sm-2 control-label" for="installation_date">Installation Date:</label>
+      <div class="col-sm-10">
+        <input class="form-control" type="date" name="station[installation_date]" value="<%= @station.date_ref.date %>">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="city">City:</label>
+      <div class="col-sm-10">
+      <select name="station[city_id]" id="city">
+        <% @city.each do |city| %>
+          <%if city.id == @station.city.id %>
+            <option value="<%= city.id %>" selected ="selected">
+              <%= city.name %>
+            </option>
+          <% else %>
+             <option value="<%= city.id %>">
+
+            <%= city.name %>
+          </option>
+            <% end %>
+        <% end %>
+      </select>
+    </div>
+  </div>
+    <div class="form-group">
+      <div class="col-sm-10 col-sm-offset-2">
+        <input class="btn btn-primary" type="submit" value="Edit Station" >
+      </div>
+    </div>
+  </form>
+</div>

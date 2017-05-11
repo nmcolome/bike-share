@@ -1,0 +1,79 @@
+<div class="page-header top">
+  <h1 class="title text-left">Create New Trip</h1><br/>
+</div>
+
+<% if params['errors'] %>
+<div class="container error">
+<%= erb :'errors/error'%>
+</div>
+<%end%>
+
+<div class="container new-station">
+  <form  class="form-horizontal" action="/trips" method="post">
+    <div class="form-group" id="form-group">
+    <label for="name" class="col-sm-2 control-label">Start Date:</label>
+      <div class="col-sm-10">
+       <input type="date" id="name" name="trip[start_date]" class="form-control" placeholder="Enter name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="end_date" class="col-sm-2 control-label">End Date:</label>
+      <div class="col-sm-10">
+        <input type="date" name="trip[end_date]" id="end_date" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="bike">Bike:</label>
+      <div class="col-sm-10">
+        <input type="textfield" name="trip[bike]" id="bike" class="form-control">
+      </div>
+    </div>
+     <div class="form-group">
+       <label class="col-sm-2 control-label" for="zipcode">Zipcode:</label>
+        <div class="col-sm-10">
+          <input type="textfield" name="trip[zipcode]" id="zipcode" class="form-control">
+        </div>
+     </div>
+     <div class="form-group">
+       <label class="col-sm-2 control-label" for="start_station">Start Station:</label>
+     <div class="col-sm-10">
+       <select name="trip[start_station]" id="start_station">
+         <% @stations.each do |station| %>
+             <option value=<%= station.id %>>
+               <%= station.name %>
+             </option>
+         <% end %>
+       </select>
+     </div>
+   </div>
+     <div class="form-group">
+       <label class="col-sm-2 control-label" for="end_station">End Station:</label>
+       <div class="col-sm-10">
+         <select name="trip[end_station]" id="end_station">
+           <% @stations.each do |station| %>
+               <option value=<%= station.id %>>
+                 <%= station.name %>
+               </option>
+           <% end %>
+         </select>
+       </div>
+     </div>
+     <div class="form-group">
+       <label class="col-sm-2 control-label" for="subscription">Subscription:</label>
+       <div class="col-sm-10">
+         <select name="trip[subscription]" id="subscription">
+           <% @subscriptions.each do |subscription| %>
+               <option value=<%= subscription.sub_type %>>
+                 <%= subscription.sub_type %>
+               </option>
+           <% end %>
+         </select>
+       </div>
+     </div>
+     <div class="form-group">
+       <div class="col-sm-10 col-sm-offset-2">
+         <input class="btn btn-primary" type="submit" value="Create New Trip" >
+       </div>
+     </div>
+  </form>
+</div>

@@ -1,0 +1,67 @@
+  <div class="page-header top">
+    <h1 class="title text-left">Create New Trip Weather</h1><br/>
+  </div>
+
+  <% if params['errors'] %>
+  <div class="container error">
+  <%= erb :'errors/error'%>
+  </div>
+  <%end%>
+
+  <div class="container new-station" >
+    <form class="form-horizontal" action="/conditions" method="post">
+      <div class="form-group" id="form-group">
+        <label class="col-sm-2 control-label" for="max_temp">Maximum Temperature (deg F):</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="float" name="weather[max_temperature]" id="max_temp" placeholder="please max temperature">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="ave_temp">Average Temperature (deg F):</label>
+        <div class="col-sm-10">
+          <input type="float" name="weather[mean_temperature]" class="form-control" id="ave_temp" placeholder="please enter average temperature">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="min_temp" class="col-sm-2 control-label">Minimum Temperature (deg F):</label>
+        <div class="col-sm-10">
+          <input type="float" name="weather[min_temperature]" id="min_temp" placeholder="please enter min temperature" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="ave_hum">Average Humidity (percentage):</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="float" name="weather[mean_humidity]" id="ave_hum" placeholder="please enter average humidity (%)">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="ave_visibility">Average Visibility (miles):</label>
+        <div class="col-sm-10">
+          <input class ="form-control" type="float" name="weather[mean_visibility]" id="ave_visibility" placeholder="please enter average visibility">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2" for="ave_wind">Average Wind Speed (mph):</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="float" name="weather[mean_wind_speed]" id="ave_wind" placeholder="please enter average wind speed">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="precipitation">Precipitation (inches):</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="float" name="weather[precipitation]" id="precipitation" placeholder="please enter precipitations">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="date">Date:</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="date" name="weather[date_ref_id]" id="Date" placeholder="please enter the date">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+          <input class="btn btn-primary" type="submit" value="Create New Weather"/>
+        </div>
+      </div>
+    </form>
+  </div>
