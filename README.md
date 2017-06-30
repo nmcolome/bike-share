@@ -1,5 +1,14 @@
 # Bike Share
 
+![Alt text](https://raw.github.com/Benjaminpjacobs/bike-share/master/screen-shots/bike-share.png?raw=true "Optional Title")
+
+## Collaborators
+
+* [Benjamin Jacobs](https://github.com/benjaminpjacobs)
+* [Natalia Colome](https://github.com/nmcolome)
+* [Sarah Kirk](https://github.com/sarahdactyl71)
+* [Chantal Justamond](https://github.com/chantal66)
+
 ## Abstract
 
 In this project you'll use Ruby, Sinatra, and Activerecord to build a site that analyzes bike share usage in San Francisco.
