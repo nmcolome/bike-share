@@ -1,7 +1,5 @@
 # Bike Share
 
-![Alt text](https://raw.github.com/Benjaminpjacobs/bike-share/master/screen-shots/bike-share.png?raw=true "Optional Title")
-
 ## Collaborators
 
 * [Benjamin Jacobs](https://github.com/benjaminpjacobs)
