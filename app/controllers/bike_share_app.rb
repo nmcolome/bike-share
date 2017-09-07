@@ -144,7 +144,9 @@ class BikeShareApp < Sinatra::Base
   end
 
 ###################################
+
 ##WEATHER
+
 ###################################
 
 #weather dashboard with statistics
