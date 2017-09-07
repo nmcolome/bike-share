@@ -2,4 +2,3 @@ db/csv/*.csv
 
 # Ignore application configuration
 /config/application.yml
-.travis.yml
